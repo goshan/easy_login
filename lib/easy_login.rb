@@ -1,5 +1,7 @@
 require "easy_login/version"
 
 module EasyLogin
-  # Your code goes here...
+	def self.helper_method
+		[:sign_in?, :current_user, :current_user?]
+	end
 end
