@@ -1,4 +1,5 @@
 require "easy_login/version"
+require "easy_login/session"
 
 module EasyLogin
 	def self.helper_method
