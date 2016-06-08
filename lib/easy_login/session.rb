@@ -12,24 +12,29 @@ module EasyLogin
 		end
 
 		def sign_in(user)
-			cookies.permanent.signed[:remember_token] = [user.id, "TODO_salt"]
+			cookies.permanent.signed[:f] = [user.id, EasyLogin::Config.salt]
 		end
 
 		def sign_out
-			cookies.delete(:remember_token)
+			cookies.delete(:f)
 		end
 
 		def current_user
-			user_from_remember_token
+			user_from_session_token
 		end
 
 		private
-		def user_from_remember_token
-			User.auth_with_salt(remember_token[0])
+		def user_from_session_token
+			user_id = session_token[0]
+			return nil if user_id == nil || !Object.const_defined?('User')
+			user = User.find_by_id(user_id)
+			return user
 		end
 
-		def remember_token
-			cookies.signed[:remember_token] || [nil, nil]
+		def session_token
+			session = cookies.signed[:f] || [nil, nil]
+			return [nil, session[1]] unless session[1] == EasyLogin::Config.salt
+			session
 		end
 	end
 end
