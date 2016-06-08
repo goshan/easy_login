@@ -4,7 +4,7 @@ a simple session controller which just including
 
 + :sign_in
 + :sign_out
-+ :sign_in?
++ :signed_in?
 + :current_user
 + :current_user?
 
@@ -12,7 +12,7 @@ for controllers and
 
 + :current_user
 + :current_user?
-+ :sign_in?
++ :signed_in?
 
 for views
 
