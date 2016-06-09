@@ -45,6 +45,8 @@ end
 
 And then you can use all the methods above in controller and view
 
+※ make sure that you have decalre a model named User
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/easy_login. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](contributor-covenant.org) code of conduct.

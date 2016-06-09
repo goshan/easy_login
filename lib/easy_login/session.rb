@@ -12,7 +12,7 @@ module EasyLogin
 		end
 
 		def sign_in(user)
-			cookies.permanent.signed[:f] = [user.id, EasyLogin::Config.salt]
+			cookies.signed[:f] = [user.id, EasyLogin::Config.salt]
 		end
 
 		def sign_out
@@ -26,7 +26,7 @@ module EasyLogin
 		private
 		def user_from_session_token
 			user_id = session_token[0]
-			return nil if user_id == nil || !Object.const_defined?('User')
+			return nil if user_id == nil
 			user = User.find_by_id(user_id)
 			return user
 		end
