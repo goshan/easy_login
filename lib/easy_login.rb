@@ -9,10 +9,6 @@ module EasyLogin
 	end
 
 	class Railtie < Rails::Railtie
-		initializer "load this gem to controller" do
-			ApplicationController.send :include, EasyLogin
-		end
-
 		config.to_prepare do
 			unless EasyLogin.configed?
 				EasyLogin.setup do |config|

@@ -33,6 +33,12 @@ EasyLogin.setup do |config|
 end
 ```
 
+Added following code to `application_controller.rb`
+
+```ruby
+include EasyLogin
+```
+
 And then abosultely use all methods above in controller and view
 
 Also you can declare a redirect schema for differenct user accessing differect
