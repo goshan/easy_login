@@ -27,7 +27,7 @@ module EasyLogin
 		def user_from_session_token
 			user_id = session_token[0]
 			return nil if user_id == nil
-			user = EasyLogin.config.user_model.cap.capitalize.constantize.find_by_id(user_id)
+			user = EasyLogin.config.user_model.capitalize.constantize.find_by_id(user_id)
 			return user
 		end
 

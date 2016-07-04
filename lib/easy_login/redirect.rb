@@ -1,7 +1,7 @@
 module EasyLogin
 	class Redirect
 		def self.parse(controller_ins)
-			per YAML.load_file Rails.root.join "config", "redirect_to.yml"
+			per = YAML.load_file Rails.root.join "config", "redirect_to.yml"
 			controller = controller_ins.params[:controller]
 			action = controller_ins.params[:action]
 			p = per[controller]

@@ -66,7 +66,7 @@ controller:
 ```
 
 The `user_role` if the role attribute of your user model configed in
-`config/application.rb` or `config/environments/*.rb`
+`config/application.rb` or `config/environments/*.rb`  
 `redirect_url` has 3 types
 
 ```

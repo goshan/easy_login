@@ -14,10 +14,12 @@ module EasyLogin
 		end
 
 		config.to_prepare do
-			unless EasyLogin.setup do |config|
-				config.salt = "salt_from_goshan"
-				config.user_model = "User"
-				config.user_role_attr = "role"
+			unless EasyLogin.configed?
+				EasyLogin.setup do |config|
+					config.salt = "salt_from_goshan"
+					config.user_model = "User"
+					config.user_role_attr = "role"
+				end
 			end
 		end
 	end
