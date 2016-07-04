@@ -1,13 +1,19 @@
 module EasyLogin
-  module Config
-    
-    def self.salt=(salt)
-      @@salt = salt
-    end
-    
-    def self.salt
-      @@salt
-    end
+	class Config
+		attr_accessor :salt, :user_model, :user_role_attr
+	end
 
-  end
+	@@config = Config.new
+
+	def self.configed?
+		@@config.salt && @@config.user_model && @@config.user_role_attr
+	end
+
+	def self.config
+		@@config
+	end
+    
+	def self.setup
+		yield @@config
+	end
 end
