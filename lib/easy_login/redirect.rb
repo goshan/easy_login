@@ -15,6 +15,7 @@ module EasyLogin
 			if url
 				raise ActionController::RoutingError.new("Routing Error") if url == 404
 				url = controller_ins.send url if url.end_with? "path"
+        return if url == "nil"
 				controller_ins.redirect_to url
 			end
 		end

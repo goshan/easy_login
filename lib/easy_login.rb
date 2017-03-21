@@ -20,12 +20,20 @@ module EasyLogin
 		end
 	end
 	
-	def self.included(base)
-		base.send :include, Session
-		base.helper_method EasyLogin.helper_method
-		base.send :before_action do |controller|
-			Redirect.parse controller
-		end
-	end
+  def self.included(base)
+    base.send :include, Session
+    if base == ApplicationController
+      base.helper_method EasyLogin.helper_method
+      base.send :before_action do |controller|
+        Redirect.parse controller
+      end
+    elsif base == ApplicationCable::Connection
+      base.send :identified_by, :client
+    end
+  end
+
+  def self.cable_authorize(connection, current_user)
+    connection.client = current_user
+  end
 
 end
