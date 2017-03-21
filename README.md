@@ -23,7 +23,7 @@ Install it yourself as:
 
 ## Usage
 
-Added config in `config/application.rb` or `config/environments/*.rb`
+Add config in `config/application.rb` or `config/environments/*.rb`
 
 ```ruby
 EasyLogin.setup do |config|
@@ -33,20 +33,10 @@ EasyLogin.setup do |config|
 end
 ```
 
-Added following code to `application_controller.rb`
+Add following code to `application_controller.rb`
 
 ```ruby
 include EasyLogin
-```
-
-※ *updated at 2017-03-21* for ActionCable::Connection in Rails 5, write code like below. `include EasyLogin` will be error.
-
-```ruby
-module ApplicationCable
-  class Connection < ActionCable::Connection::Base
-    include EasyLogin::Session
-  end
-end
 ```
 
 And then abosultely use all methods above in controller and view
@@ -88,8 +78,27 @@ The `user_role` if the role attribute of your user model configed in
 ```
 404 --> means raise a 404 error name 'Routing Error'
 XXXX_path --> means using rails routing method
+nil --> means not redirect and render view absolutely
 otherwise --> means using as absolute url string
 ```
+
+※ *if you also want to use in ActionCable in Rails 5*  
+Add following code to `application_cable/connection.rb`
+
+```ruby
+module ApplicationCable
+  class Connection < ActionCable::Connection::Base
+    include EasyLogin::Session
+    
+    def connect
+      reject_unauthorized_connection unless current_user
+      EasyLogin.cable_authorize self, current_user
+    end
+  end
+end
+```
+
+And then you can access authorized user in other `Channel` with client
 
 
 
