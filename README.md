@@ -88,7 +88,7 @@ Add following code to `application_cable/connection.rb`
 ```ruby
 module ApplicationCable
   class Connection < ActionCable::Connection::Base
-    include EasyLogin::Session
+    include EasyLogin
     
     def connect
       reject_unauthorized_connection unless current_user
