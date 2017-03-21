@@ -39,6 +39,16 @@ Added following code to `application_controller.rb`
 include EasyLogin
 ```
 
+※ *updated at 2017-03-21* for ActionCable::Connection in Rails 5, write code like below. `include EasyLogin` will be error.
+
+```ruby
+module ApplicationCable
+  class Connection < ActionCable::Connection::Base
+    include EasyLogin::Session
+  end
+end
+```
+
 And then abosultely use all methods above in controller and view
 
 Also you can declare a redirect schema for differenct user accessing differect
