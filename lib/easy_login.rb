@@ -1,8 +1,11 @@
+require "base64"
 require "digest/md5"
+require "json"
 require "time"
 require "easy_login/version"
 require "easy_login/config"
 require "easy_login/session"
+require "easy_login/grape_helper"
 require "easy_login/redirect"
 
 module EasyLogin
@@ -31,6 +34,8 @@ module EasyLogin
       end
     elsif base == ApplicationCable::Connection
       base.send :identified_by, :client
+    elsif base == Grape::API || base.superclass == Grape::API
+      base.helpers GrapeHelper
     end
   end
 
