@@ -113,6 +113,14 @@ And then you can use some methods below in this and any other sub classes of api
 - current_user?(user)
 - authorize! --> response 403 error and json if authorization failed
 
+If you want auth for every api request, write like following
+
+```ruby
+after_validation do
+	authorize!
+end
+```
+
 
 ## License
 
