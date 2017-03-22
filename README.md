@@ -82,7 +82,7 @@ nil --> means not redirect and render view absolutely
 otherwise --> means using as absolute url string
 ```
 
-※ *if you also want to use in ActionCable in Rails 5*  
+*※ If you also want to use in ActionCable in Rails 5*  
 Add following code to `application_cable/connection.rb`
 
 ```ruby
@@ -100,6 +100,18 @@ end
 
 And then you can access authorized user in other `Channel` with client
 
+*※ If you also want to use in GrapeAPI (just authorize with cookies like controller, not support omini auth)*  
+Add following code to your root api class extends Grape::API such as `api/root.rb`
+
+```ruby
+include EasyLogin
+```
+
+And then you can use some methods below in this and any other sub classes of api
+- signed_in?
+- current_user
+- current_user?(user)
+- authorize! --> response 403 error and json if authorization failed
 
 
 ## License
