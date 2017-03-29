@@ -43,7 +43,7 @@ And then abosultely use all methods above in controller and view
 
 Also you can declare a redirect schema for differenct user accessing differect
 controller and action
-Add a config file to `config/redirect_to.yml` as following
+Add a config file to `config/http_permissions.yml` as following
 
 ```yaml
 default:

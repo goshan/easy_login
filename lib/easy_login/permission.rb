@@ -15,7 +15,7 @@ module EasyLogin
 
     private
     def self.parse(controller_ins)
-      per = YAML.load_file Rails.root.join "config", "easy_login_permission.yml"
+      per = YAML.load_file Rails.root.join "config", "http_permissions.yml"
       controller = controller_ins.params[:controller]
       action = controller_ins.params[:action]
 
