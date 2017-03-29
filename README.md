@@ -47,40 +47,43 @@ Add a config file to `config/redirect_to.yml` as following
 
 ```yaml
 default:
-  unsign: login_users_path
+  ope: pass
+  customer: pass
+  unsigned: redirect_to->login_users_path
 users:
   login:
-    ope: root_path
-    customer: root_path
+    ope: redirect_to->root_path
+    customer: redirect_to->root_path
 tools:
   default:
-    customer: 404
-    unsign: /tools/login
+    customer: raise->Routing Error
+    unsigned: redirect_to->/tools/login
   login:
-    ope: tools_path
-    customer: 404
+    ope: redirect_to->tools_path
+    customer: raise->Other Error
 ```
 
-The basic format for this redirect schema is like
+The basic format for this permission schema is like
 
 ```yaml
 controller:
   action:
-    user_role1: redirect_url
-    user_role2: redirect_url
-    user_role3: redirect_url
+    user_role1: pass
+    user_role2: redirect_to->{path}
+    user_role3: raise->{message}
 ```
 
 The `user_role` if the role attribute of your user model configed in
 `config/application.rb` or `config/environments/*.rb`  
-`redirect_url` has 3 types
+`action` has 3 types
 
 ```
-404 --> means raise a 404 error name 'Routing Error'
-XXXX_path --> means using rails routing method
-nil --> means not redirect and render view absolutely
-otherwise --> means using as absolute url string
+pass --> run the logic in action normally
+redirect_to --> redirect to other {path}, {path} also has two types, {xxx_path} means using rails routing method, and {other format} means used as absolute url string
+raise --> raise a 404 response with {message}
 ```
+
+If the schema was not defined in controller/action/user_role, the schema in controller/default/user_role will be used, Also, if it was not defined in controller/default/user_role, default/user_role will be used, if still default/user_role could not be found, easylogin will do action same as 'pass'
 
 *※ If you also want to use in ActionCable in Rails 5*  
 Add following code to `application_cable/connection.rb`

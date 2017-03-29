@@ -6,7 +6,7 @@ require "easy_login/version"
 require "easy_login/config"
 require "easy_login/session"
 require "easy_login/grape_helper"
-require "easy_login/redirect"
+require "easy_login/permission"
 
 module EasyLogin
 	def self.helper_method
@@ -30,7 +30,7 @@ module EasyLogin
     if base == ApplicationController
       base.helper_method EasyLogin.helper_method
       base.send :before_action do |controller|
-        Redirect.parse controller
+        Permission.action controller
       end
     elsif base == ApplicationCable::Connection
       base.send :identified_by, :client
