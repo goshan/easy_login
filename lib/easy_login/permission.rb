@@ -3,7 +3,7 @@ module EasyLogin
 		def self.action(controller_ins)
       url = self.parse controller_ins
 			if url
-        params = url.split ':'
+        params = url.split '->'
         return if params[0] == "pass"
 				raise ActionController::RoutingError.new(params[1]) if params[0] == "raise"
         if params[0] == "redirect_to"
