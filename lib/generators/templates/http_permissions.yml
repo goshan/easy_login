@@ -1,7 +1,28 @@
+# Declare a redirect schema for differenct user accessing differect controller and action here
+#
+# The basic format for this permission schema is like
+# controller:
+#   action:
+#     user_role1: pass
+#     user_role2: redirect_to->{path}
+#     user_role3: raise->{message}
+#
+# The user_role if the role attribute of your user model configed in config/application.rb or config/environments/*.rb
+#
+# The action has 3 types
+#   pass --> run the logic in action normally
+#   redirect_to --> redirect to other {path}, {path} also has two types, {xxx_path} means using rails routing method, and {other format} means used as absolute url string
+#   raise --> raise a 404 response with {message}
+#
+# If the schema was not defined in controller/action/user_role, the schema in controller/default/user_role will be used.
+# Also, if it was not defined in controller/default/user_role, default/user_role will be used.
+# If still default/user_role could not be found, easylogin will do action same as 'pass'
+#
+#
 default:
   ope: pass
   customer: pass
-  unsigned: redirect_to->login_users_path
+  unsigned: redirect_to->login_user_path
 users:
   login:
     ope: redirect_to->root_path

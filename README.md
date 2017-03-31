@@ -54,7 +54,7 @@ The following is a default code of `config/http_permissions.yml`
 default:
   ope: pass
   customer: pass
-  unsigned: redirect_to->login_users_path
+  unsigned: redirect_to->login_user_path
 users:
   login:
     ope: redirect_to->root_path
@@ -63,9 +63,6 @@ tools:
   default:
     customer: raise->Routing Error
     unsigned: redirect_to->/tools/login
-  login:
-    ope: redirect_to->tools_path
-    customer: raise->Other Error
 ```
 
 The basic format for this permission schema is like
