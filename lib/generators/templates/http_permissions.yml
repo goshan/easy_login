@@ -1,0 +1,12 @@
+default:
+  ope: pass
+  customer: pass
+  unsigned: redirect_to->login_users_path
+users:
+  login:
+    ope: redirect_to->root_path
+    customer: redirect_to->root_path
+tools:
+  default:
+    customer: raise->Routing Error
+    unsigned: redirect_to->/tools/login

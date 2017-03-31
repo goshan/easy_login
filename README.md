@@ -21,6 +21,10 @@ Install it yourself as:
 
     $ gem install easy_login
 
+And then run command to init a config file
+
+	$ bundle exec rails generate easy_login:init
+
 ## Usage
 
 Add config in `config/application.rb` or `config/environments/*.rb`
@@ -42,8 +46,9 @@ include EasyLogin
 And then abosultely use all methods above in controller and view
 
 Also you can declare a redirect schema for differenct user accessing differect
-controller and action
-Add a config file to `config/http_permissions.yml` as following
+controller and action by editing config file `config/http_permissions.yml`
+
+The following is a default code of `config/http_permissions.yml`
 
 ```yaml
 default:
