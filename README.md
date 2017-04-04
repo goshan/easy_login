@@ -75,7 +75,20 @@ controller:
     user_role3: raise->{message}
 ```
 
-The `user_role` if the role attribute of your user model configed in `config/application.rb` or `config/environments/*.rb`  
+The `user_role` is the role attribute of your user model configed in `config/application.rb` or `config/environments/*.rb`  
+And also you need define a enum about this role like:
+
+```ruby
+class User < ApplicationRecord
+  has_secure_password
+
+  enum :role => {
+    :user_role1 => 0,
+    :user_role2 => 1,
+    :user_role3 => 2
+  }
+end
+```
   
 The `action` has 3 types
 
