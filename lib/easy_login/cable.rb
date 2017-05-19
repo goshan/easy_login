@@ -1,5 +1,4 @@
 module EasyLogin
-
   module Cable
     def signed_in?
       return !current_user.nil?

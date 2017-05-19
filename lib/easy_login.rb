@@ -5,6 +5,7 @@ require "time"
 require "easy_login/version"
 require "easy_login/config"
 require "easy_login/session"
+require "easy_login/cable"
 require "easy_login/grape_helper"
 require "easy_login/permission"
 
