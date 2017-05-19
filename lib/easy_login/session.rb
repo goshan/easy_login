@@ -29,8 +29,8 @@ module EasyLogin
 		end
 
     def easy_login_session
-      session = cookies.signed[:f]
-      "<div id='easy_login_session' uid=#{session[0]} ts='#{session[1]}' d='#{session[2]}'></div>".html_safe
+      session = cookies[:f]
+      "<div id='easy_login_session' f='#{cookies[:f]}'></div>".html_safe
     end
 
 		private
