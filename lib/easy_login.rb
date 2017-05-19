@@ -10,7 +10,7 @@ require "easy_login/permission"
 
 module EasyLogin
 	def self.helper_method
-		[:signed_in?, :current_user, :current_user?, :cable_session]
+		[:signed_in?, :current_user, :current_user?, :easy_login_session]
 	end
 
 	class Railtie < Rails::Railtie
