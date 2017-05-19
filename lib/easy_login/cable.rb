@@ -1,5 +1,6 @@
 module EasyLogin
-  module GrapeHelper
+
+  module Cable
     def signed_in?
       return !current_user.nil?
     end
@@ -16,13 +17,6 @@ module EasyLogin
       return nil if user_id == nil
       user = EasyLogin.config.user_model.capitalize.constantize.find_by_id(user_id)
       return user
-    end
-
-    def authorize!
-      unless current_user
-        logger.info "Error 403: User authorization failed"
-        error!({:error => "authorize_failed", :msg => "User authorization failed"}, 403)
-      end
     end
 
     private

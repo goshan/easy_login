@@ -10,7 +10,7 @@ require "easy_login/permission"
 
 module EasyLogin
 	def self.helper_method
-		[:signed_in?, :current_user, :current_user?]
+		[:signed_in?, :current_user, :current_user?, :cable_session]
 	end
 
 	class Railtie < Rails::Railtie
@@ -26,21 +26,17 @@ module EasyLogin
 	end
 	
   def self.included(base)
-    base.send :include, Session
     if base == ApplicationController
+      base.send :include, Session
       base.helper_method EasyLogin.helper_method
       base.send :before_action do |controller|
         Permission.action controller
       end
-    elsif base == ApplicationCable::Connection
-      base.send :identified_by, :client
+    elsif base == ApplicationCable::Channel
+      base.send :include, Cable
     elsif base == Grape::API || base.superclass == Grape::API
       base.helpers GrapeHelper
     end
-  end
-
-  def self.cable_authorize(connection, current_user)
-    connection.client = current_user
   end
 
 end

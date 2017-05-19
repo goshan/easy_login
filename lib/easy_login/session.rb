@@ -28,6 +28,19 @@ module EasyLogin
 			return user
 		end
 
+    def cable_session
+      session = cookies.signed[:f]
+      "<div id='easy_login_session' uid=#{session[0]} ts='#{session[1]}' d='#{session[2]}'></div>".html_safe
+    end
+
+    def cable_current_user
+      return nil unless params[:user_id] && params[:timestamp] && params[:digest]
+      digest = Digest::MD5.hexdigest "#{params[:user_id]},#{EasyLogin.config.salt},#{Time.parse(params[:timestamp]).to_i}"
+      return nil unless params[:digest] == digest
+      user = EasyLogin.config.user_model.capitalize.constantize.find_by_id(params[:user_id])
+      return user
+    end
+
 		private
     def session_info
       session = cookies.signed[:f]
