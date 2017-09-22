@@ -101,19 +101,19 @@ raise --> raise a 404 response with {message}
 If the schema was not defined in controller/action/user_role, the schema in controller/default/user_role will be used, Also, if it was not defined in controller/default/user_role, default/user_role will be used, if still default/user_role could not be found, easylogin will do action same as 'pass'
 
 *※ If you also want to use in ActionCable in Rails 5*  
-Add following code to `application_cable/connection.rb`
+Add following code to `application_cable/channel.rb`
 
 ```ruby
 module ApplicationCable
-  class Connection < ActionCable::Connection::Base
+  class Channel < ActionCable::Channel::Base
     include EasyLogin
-    
-    def connect
-      reject_unauthorized_connection unless current_user
-      EasyLogin.cable_authorize self, current_user
-    end
   end
 end
+```
+And then add `easy_login_session` into view where you want to use cable, so that you can get session param `f` in cable js when create connection like following.
+
+```javascript
+App.channel = App.cable.subscriptions.create {channel: "Channel", f: $('#easy_login_session').attr('f')},
 ```
 
 And then you can access authorized user in other `Channel` with client
