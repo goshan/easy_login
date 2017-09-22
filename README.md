@@ -110,7 +110,7 @@ module ApplicationCable
   end
 end
 ```
-And then add `easy_login_session` into view where you want to use cable, so that you can get session param `f` in cable js when create connection like following.
+And then use helper method `easy_login_session` in the view where you want to use cable, so that you can get session param `f` in cable js when create connection like following.
 
 ```javascript
 App.channel = App.cable.subscriptions.create {channel: "Channel", f: $('#easy_login_session').attr('f')},
