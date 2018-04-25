@@ -1,17 +1,17 @@
 module EasyLogin
-	class Permission
-		def self.action(controller_ins)
+  class Permission
+    def self.action(controller_ins)
       url = self.parse controller_ins
-			if url
+      if url
         params = url.split '->'
         return if params[0] == "pass"
-				raise ActionController::RoutingError.new(params[1]) if params[0] == "raise"
+        raise ActionController::RoutingError.new(params[1]) if params[0] == "raise"
         if params[0] == "redirect_to"
           params[1] = controller_ins.send params[1] if params[1].end_with? "path"
           controller_ins.redirect_to params[1]
         end
-			end
-		end
+      end
+    end
 
     private
     def self.parse(controller_ins)
@@ -31,5 +31,5 @@ module EasyLogin
       per = per[action]
       return per[role] || default
     end
-	end
+  end
 end

@@ -10,22 +10,22 @@ require "easy_login/grape_helper"
 require "easy_login/permission"
 
 module EasyLogin
-	def self.helper_method
-		[:signed_in?, :current_user, :current_user?, :easy_login_session]
-	end
+  def self.helper_method
+    [:signed_in?, :current_user, :current_user?, :easy_login_session]
+  end
 
-	class Railtie < Rails::Railtie
-		config.to_prepare do
-			unless EasyLogin.configed?
-				EasyLogin.setup do |config|
-					config.salt = "salt_from_goshan"
-					config.user_model = "User"
-					config.user_role_attr = "role"
-				end
-			end
-		end
-	end
-	
+  class Railtie < Rails::Railtie
+    config.to_prepare do
+      unless EasyLogin.configed?
+        EasyLogin.setup do |config|
+          config.salt = "salt_from_goshan"
+          config.user_model = "User"
+          config.user_role_attr = "role"
+        end
+      end
+    end
+  end
+  
   def self.included(base)
     if base == ApplicationController
       base.send :include, Session

@@ -23,7 +23,7 @@ Install it yourself as:
 
 And then run command to init a config file
 
-	$ bundle exec rails generate easy_login:init
+  $ bundle exec rails generate easy_login:init
 
 ## Usage
 
@@ -31,9 +31,9 @@ Add config in `config/application.rb` or `config/environments/*.rb`
 
 ```ruby
 EasyLogin.setup do |config|
-	config.salt = "same_salt_string"
-	config.user_model = "your user model such as 'User'"
-	config.user_role_attr = "your role attribute in user model such as 'role'"
+  config.salt = "same_salt_string"
+  config.user_model = "your user model such as 'User'"
+  config.user_role_attr = "your role attribute in user model such as 'role'"
 end
 ```
 
@@ -135,7 +135,7 @@ If you want auth for every api request, write like following
 
 ```ruby
 after_validation do
-	authorize!
+  authorize!
 end
 ```
 
